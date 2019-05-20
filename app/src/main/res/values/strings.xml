@@ -1,3 +1,10 @@
 <resources>
-    <string name="app_name">Homes&amp;Rentals</string>
+    <string name="app_name">Homes &amp; Rentals</string>
+    <string name="login">LOGIN</string>
+    <string name="signup">SIGN UP</string>
+    <string name="password">password</string>
+    <string name="email">email</string>
+    <string name="username">username</string>
+    <string name="phone">phone</string>
+    <string name="registration_done">registration_done</string>
 </resources>

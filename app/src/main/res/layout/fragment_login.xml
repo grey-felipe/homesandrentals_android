@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".authentication.view.LoginFragment">
+
+    <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:layout_gravity="center_horizontal">
+
+        <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/loginEmailEdt"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:inputType="textEmailAddress"
+                android:padding="8dp"
+                android:hint="@string/email"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:layout_gravity="center_horizontal">
+
+        <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/loginPasswordEdt"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:padding="8dp"
+                android:inputType="textPassword"
+                android:hint="@string/password"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/loginSignUpButton"
+                android:text="@string/signup"
+                android:layout_width="100dp"
+                android:layout_marginEnd="2dp"
+                android:layout_height="50dp"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/loginButton"
+                android:text="@string/login"
+                android:layout_width="100dp"
+                android:layout_marginStart="2dp"
+                android:layout_height="50dp"/>
+    </LinearLayout>
+
+</LinearLayout>
