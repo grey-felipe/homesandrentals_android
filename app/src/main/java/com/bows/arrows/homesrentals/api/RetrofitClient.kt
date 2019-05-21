@@ -9,9 +9,8 @@ object RetrofitClient {
 
     private val okHttpClient = OkHttpClient.Builder().addInterceptor { chain ->
         val original = chain.request()
-
         val requestBuilder = original.newBuilder()
-            .addHeader("Authorization", "")
+            .addHeader("Authorization", "Bearer ${Constants.AUTH_TOKEN}")
             .method(original.method(), original.body())
 
         val request = requestBuilder.build()
@@ -29,19 +28,3 @@ object RetrofitClient {
         retrofit.create(IApi::class.java)
     }
 }
-
-
-//    private val authInterceptor = Interceptor { chain ->
-//        val original = chain.request()
-//        val requestBuilder = original
-//            .newBuilder()
-//            .addHeader("Authorization", "")
-//            .method(original.method(), original.body())
-//        val request = requestBuilder.build()
-//        chain.proceed(request)
-//    }
-//
-//    private val okHttpClient = OkHttpClient()
-//        .newBuilder()
-//        .addInterceptor(authInterceptor)
-//        .build()
