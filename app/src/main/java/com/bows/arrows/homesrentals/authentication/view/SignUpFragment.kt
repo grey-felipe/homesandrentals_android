@@ -80,7 +80,6 @@ class SignUpFragment : Fragment(), ISignUpView {
 
     override fun onSubmitSuccess() {
         fragmentManager!!.popBackStackImmediate()
-//        Toast.makeText(context, "Registration successful, please login.", Toast.LENGTH_SHORT).show()
     }
 
     companion object {

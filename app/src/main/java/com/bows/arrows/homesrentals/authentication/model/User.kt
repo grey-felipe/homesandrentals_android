@@ -2,7 +2,7 @@ package com.bows.arrows.homesrentals.authentication.model
 
 import android.util.Log
 import com.bows.arrows.homesrentals.api.RetrofitClient
-import com.bows.arrows.homesrentals.api.response_models.RequestResponse
+import com.bows.arrows.homesrentals.api.response_models.AuthResponse
 import com.bows.arrows.homesrentals.authentication.presenter.LoginPresenterImpl
 import com.bows.arrows.homesrentals.authentication.presenter.SignUpPresenterImpl
 import com.google.gson.annotations.SerializedName
@@ -30,8 +30,8 @@ data class User(
     var token: String = ""
 ) : IUser {
 
-    private var signUpPresenterImplObj: SignUpPresenterImpl? = null
-    private var loginPresenterImplObj: LoginPresenterImpl? = null
+    private lateinit var signUpPresenterImplObj: SignUpPresenterImpl
+    private lateinit var loginPresenterImplObj: LoginPresenterImpl
 
     fun getSignUpPresenterObj(obj: SignUpPresenterImpl) {
         signUpPresenterImplObj = obj
@@ -57,12 +57,12 @@ data class User(
 
         RetrofitClient.instance
             .registerUser(userMap)
-            .enqueue(object : Callback<RequestResponse> {
-                override fun onFailure(call: Call<RequestResponse>, t: Throwable) {
+            .enqueue(object : Callback<AuthResponse> {
+                override fun onFailure(call: Call<AuthResponse>, t: Throwable) {
                     Log.e("reg_error: ", t.cause.toString())
                 }
 
-                override fun onResponse(call: Call<RequestResponse>, response: Response<RequestResponse>) {
+                override fun onResponse(call: Call<AuthResponse>, response: Response<AuthResponse>) {
                     when (response.code()) {
                         400 -> {
                             onPushError()
@@ -76,11 +76,11 @@ data class User(
     }
 
     override fun onPushError() {
-        signUpPresenterImplObj!!.onPushError()
+        signUpPresenterImplObj.onPushError()
     }
 
     override fun onPushSuccess() {
-        signUpPresenterImplObj!!.onPushSuccess()
+        signUpPresenterImplObj.onPushSuccess()
     }
 
     //Login user
@@ -94,12 +94,12 @@ data class User(
 
         RetrofitClient.instance
             .loginUser(userMap)
-            .enqueue(object : Callback<RequestResponse> {
-                override fun onFailure(call: Call<RequestResponse>, t: Throwable) {
+            .enqueue(object : Callback<AuthResponse> {
+                override fun onFailure(call: Call<AuthResponse>, t: Throwable) {
                     Log.e("login_error: ", t.cause.toString())
                 }
 
-                override fun onResponse(call: Call<RequestResponse>, response: Response<RequestResponse>) {
+                override fun onResponse(call: Call<AuthResponse>, response: Response<AuthResponse>) {
                     when (response.code()) {
                         400 -> {
                             onLoginError()
@@ -114,10 +114,10 @@ data class User(
     }
 
     override fun onLoginError() {
-        loginPresenterImplObj!!.onLoginError()
+        loginPresenterImplObj.onLoginError()
     }
 
     override fun onLoginSuccess(token: String) {
-        loginPresenterImplObj!!.onLoginSuccess(token)
+        loginPresenterImplObj.onLoginSuccess(token)
     }
 }

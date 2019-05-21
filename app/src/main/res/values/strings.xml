@@ -7,4 +7,24 @@
     <string name="username">username</string>
     <string name="phone">phone</string>
     <string name="registration_done">registration_done</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title">title</string>
+    <string name="price">price</string>
+    <string name="description">description</string>
+    <string name="currency">currency</string>
+    <string name="bottom_nav_home">Home</string>
+    <string name="bottom_nav_search">Search</string>
+    <string name="bottom_nav_add_property">Add</string>
+    <string name="bottom_nav_property">Property</string>
+    <string name="bottom_nav_profile">Profile</string>
+    <string name="bottom_nav_favorites">Favorites</string>
+    <string name="usd">USD</string>
+    <string name="ushs">USHS</string>
+    <string name="for_sale">FOR SALE</string>
+    <string name="for_rent">FOR RENT</string>
+    <string name="add_property_location">Add location</string>
+    <string name="add_property_media">Add media</string>
+    <string name="add_property">Add property</string>
 </resources>

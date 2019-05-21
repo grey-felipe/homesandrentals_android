@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".property_module.view.AddPropertyFragment">
+
+    <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_marginTop="25dp"
+            android:layout_gravity="center_horizontal">
+
+        <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/propertyNameEdt"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:inputType="text"
+                android:padding="8dp"
+                android:hint="@string/title"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <LinearLayout
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="25dp"
+            android:layout_gravity="center_horizontal">
+
+        <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxWidth="200dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_weight="1">
+
+            <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/propertyPriceEdt"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:padding="8dp"
+                    android:inputType="number"
+                    android:hint="@string/price"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.jaredrummler.materialspinner.MaterialSpinner
+                android:id="@+id/propertyCurrencySpinner"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+    </LinearLayout>
+
+    <LinearLayout
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="25dp"
+            android:orientation="horizontal">
+
+        <com.google.android.material.chip.ChipGroup
+                android:id="@+id/add_property_chip_group"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:singleSelection="true">
+
+            <com.google.android.material.chip.Chip
+                    android:id="@+id/add_property_for_sale_chip"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/for_sale"/>
+
+            <com.google.android.material.chip.Chip
+                    android:id="@+id/add_property_for_rent_chip"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/for_rent"/>
+        </com.google.android.material.chip.ChipGroup>
+
+    </LinearLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_marginTop="25dp"
+            android:layout_gravity="center_horizontal">
+
+        <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/propertyDescriptionEdt"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:lines="8"
+                android:padding="8dp"
+                android:inputType="text|textMultiLine"
+                android:hint="@string/description"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+</LinearLayout>
