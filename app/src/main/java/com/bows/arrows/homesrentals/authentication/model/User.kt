@@ -1,14 +1,11 @@
 package com.bows.arrows.homesrentals.authentication.model
 
-import android.util.Log
 import com.bows.arrows.homesrentals.api.RetrofitClient
-import com.bows.arrows.homesrentals.api.response_models.AuthResponse
 import com.bows.arrows.homesrentals.authentication.presenter.LoginPresenterImpl
 import com.bows.arrows.homesrentals.authentication.presenter.SignUpPresenterImpl
 import com.google.gson.annotations.SerializedName
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 
 
 data class User(
@@ -55,28 +52,24 @@ data class User(
         val userMap = HashMap<String, HashMap<String, Any>>()
         userMap["user"] = map
 
-        RetrofitClient.instance
+        val disposable = RetrofitClient.instance
             .registerUser(userMap)
-            .enqueue(object : Callback<AuthResponse> {
-                override fun onFailure(call: Call<AuthResponse>, t: Throwable) {
-                    Log.e("reg_error: ", t.cause.toString())
-                }
-
-                override fun onResponse(call: Call<AuthResponse>, response: Response<AuthResponse>) {
-                    when (response.code()) {
-                        400 -> {
-                            onPushError()
-                        }
-                        201 -> {
-                            onPushSuccess()
-                        }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                when (it.code()) {
+                    400 -> {
+                        onPushError("User already exists")
+                    }
+                    201 -> {
+                        onPushSuccess()
                     }
                 }
-            })
+            }, { error -> onPushError(error.cause.toString()) })
     }
 
-    override fun onPushError() {
-        signUpPresenterImplObj.onPushError()
+    override fun onPushError(message: String) {
+        signUpPresenterImplObj.onPushError(message)
     }
 
     override fun onPushSuccess() {
@@ -92,25 +85,21 @@ data class User(
         val userMap = HashMap<String, HashMap<String, Any>>()
         userMap["user"] = map
 
-        RetrofitClient.instance
+        val disposable = RetrofitClient.instance
             .loginUser(userMap)
-            .enqueue(object : Callback<AuthResponse> {
-                override fun onFailure(call: Call<AuthResponse>, t: Throwable) {
-                    Log.e("login_error: ", t.cause.toString())
-                }
-
-                override fun onResponse(call: Call<AuthResponse>, response: Response<AuthResponse>) {
-                    when (response.code()) {
-                        400 -> {
-                            onLoginError()
-                        }
-                        200 -> {
-                            val token: String = response.body()!!.user.token
-                            onLoginSuccess(token)
-                        }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                when (it.code()) {
+                    400 -> {
+                        onLoginError()
+                    }
+                    200 -> {
+                        val token: String = it.body()!!.user.token
+                        onLoginSuccess(token)
                     }
                 }
-            })
+            }, { onLoginError() })
     }
 
     override fun onLoginError() {

@@ -3,6 +3,7 @@ package com.bows.arrows.homesrentals.api
 import com.bows.arrows.homesrentals.utilities.Constants
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitClient {
@@ -21,6 +22,7 @@ object RetrofitClient {
         val retrofit = Retrofit
             .Builder()
             .baseUrl(Constants.BASE_URL)
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
             .client(okHttpClient)
             .build()

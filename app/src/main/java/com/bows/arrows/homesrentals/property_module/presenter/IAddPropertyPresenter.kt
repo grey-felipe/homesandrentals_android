@@ -1,11 +1,10 @@
 package com.bows.arrows.homesrentals.property_module.presenter
 
+import android.net.Uri
+import com.bows.arrows.homesrentals.property_module.view.AddPropertyViewModel
+
 interface IAddPropertyPresenter {
-    fun validatePropertyData(
-        title: String, price: Int, currency: String,
-        type: String, available: Boolean, description: String,
-        location: String, coordinates: String, media: List<String>
-    )
-    fun onPushError()
-    fun onPushSuccess()
+    fun validatePropertyMedia(list: List<Uri>, viewModel: AddPropertyViewModel)
+    fun onPushError(message: String)
+    fun onPushSuccess(message: String)
 }

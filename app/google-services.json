@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "431368813044",
+    "firebase_url": "https://homesandrentals-47426.firebaseio.com",
+    "project_id": "homesandrentals-47426",
+    "storage_bucket": "homesandrentals-47426.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:431368813044:android:e4af070a03fbe903",
+        "android_client_info": {
+          "package_name": "com.bows.arrows.homesrentals"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "431368813044-g5qk5ks8n4gkicjk8omb3tmeaa7cuu19.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bows.arrows.homesrentals",
+            "certificate_hash": "8db0a4280a6300648db43c341711c8803689c820"
+          }
+        },
+        {
+          "client_id": "431368813044-pgp7n8037mfoe2vq0a0bv17u075753la.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAaaUFgnyRTMTIzH_XcNM26kAyw6cFnCmU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "431368813044-pgp7n8037mfoe2vq0a0bv17u075753la.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
