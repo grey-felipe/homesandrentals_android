@@ -8,7 +8,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.bows.arrows.homesrentals.R
-import com.bows.arrows.homesrentals.authentication.model.User
 import com.bows.arrows.homesrentals.authentication.presenter.SignUpPresenterImpl
 
 
@@ -70,12 +69,8 @@ class SignUpFragment : Fragment(), ISignUpView {
         Toast.makeText(context, "$value was not provided.", Toast.LENGTH_SHORT).show()
     }
 
-    override fun onSubmitError() {
-        Toast.makeText(
-            context,
-            "Registration failed, check your network or the username, email, phone already exist.",
-            Toast.LENGTH_SHORT
-        ).show()
+    override fun onSubmitError(message: String) {
+        Toast.makeText(context, "Registration failed, $message", Toast.LENGTH_SHORT).show()
     }
 
     override fun onSubmitSuccess() {

@@ -1,65 +1,30 @@
 package com.bows.arrows.homesrentals.property_module.presenter
 
+import android.net.Uri
 import com.bows.arrows.homesrentals.property_module.model.Property
-import com.bows.arrows.homesrentals.property_module.view.IAddPropertyView
+import com.bows.arrows.homesrentals.property_module.view.AddPropertyViewModel
+import com.bows.arrows.homesrentals.property_module.view.IPropertyMediaView
 
-class AddPropertyPresenterImpl(private val iAddPropertyView: IAddPropertyView) : IAddPropertyPresenter {
+class AddPropertyPresenterImpl(private val view: IPropertyMediaView) : IAddPropertyPresenter {
 
-    override fun validatePropertyData(
-        title: String,
-        price: Int,
-        currency: String,
-        type: String,
-        available: Boolean,
-        description: String,
-        location: String,
-        coordinates: String,
-        media: List<String>
-    ) {
+    private lateinit var property: Property
+
+    override fun validatePropertyMedia(list: List<Uri>, viewModel: AddPropertyViewModel) {
         when {
-            title.isEmpty() || title.isBlank() -> {
-                iAddPropertyView.onValidationError("Title")
-            }
-            price <= 0 -> {
-                iAddPropertyView.onValidationError("Price")
-            }
-            currency.isEmpty() || currency.isBlank() -> {
-                iAddPropertyView.onValidationError("Currency")
-            }
-            type.isEmpty() || type.isBlank() -> {
-                iAddPropertyView.onValidationError("Type")
-            }
-            description.isEmpty() || description.isBlank() -> {
-                iAddPropertyView.onValidationError("Description")
-            }
-            location.isEmpty() || location.isBlank() -> {
-                iAddPropertyView.onValidationError("Location")
-            }
-            coordinates.isEmpty() || coordinates.isBlank() -> {
-                iAddPropertyView.onValidationError("Coordinates")
-            }
-            media.isEmpty() -> {
-                iAddPropertyView.onValidationError("Photos/Videos")
+            list.isEmpty() -> {
+                view.onValidationError("images")
             }
             else -> {
-                val property = Property(
-                    title,
-                    price, currency, type,
-                    available, description, location,
-                    coordinates, media
-                )
+                property = viewModel.getPropertyObject()
                 property.getPresenterImpl(this)
-                property.pushPropertyDataToBackend(property)
-
+                property.media = property.pushMediaToFireBase(list, 0)
             }
         }
     }
 
-    override fun onPushError() {
-        iAddPropertyView.onSubmitError()
+    override fun onPushError(message: String) {
     }
 
-    override fun onPushSuccess() {
-        iAddPropertyView.onSubmitSuccess()
+    override fun onPushSuccess(message: String) {
     }
 }

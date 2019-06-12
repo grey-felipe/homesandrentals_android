@@ -3,6 +3,7 @@ package com.bows.arrows.homesrentals
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -10,10 +11,12 @@ import com.bows.arrows.homesrentals.home_module.view.HomeFragment
 import com.bows.arrows.homesrentals.property_module.view.PropertyFragment
 import com.bows.arrows.homesrentals.utilities.Constants
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     lateinit var toolbar: Toolbar
+    private var mAuth: FirebaseAuth? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,5 +59,20 @@ class MainActivity : AppCompatActivity() {
             false
         }
         main_bottom_navigation_bar.setOnNavigationItemSelectedListener(mNavigationItemSelectedListener)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        val currentUser = mAuth?.currentUser
+        if (currentUser == null) {
+            anonymousFireBaseSignIn()
+        } else {
+            Log.i("current_user", mAuth?.currentUser!!.uid)
+        }
+    }
+
+    private fun anonymousFireBaseSignIn() {
+        mAuth = FirebaseAuth.getInstance()
+        mAuth?.signInAnonymously()?.addOnCompleteListener { Log.i("anonymous_user", mAuth?.currentUser!!.uid) }
     }
 }

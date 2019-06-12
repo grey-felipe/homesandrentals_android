@@ -27,4 +27,12 @@
     <string name="add_property_location">Add location</string>
     <string name="add_property_media">Add media</string>
     <string name="add_property">Add property</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="next">NEXT</string>
+    <string name="add_images">add images</string>
+    <string name="submit_property">Submit Property</string>
+    <string name="add_media">Add Media</string>
+    <string name="CLOUDINARY_API_SECRET">wKdnjINOVDIg3LWC8A83L3fA_vA</string>
+    <string name="CLOUDINARY_API_KEY">225221816666612</string>
+    <string name="CLOUDINARY_CLOUD_NAME">dx3ksne0c</string>
 </resources>

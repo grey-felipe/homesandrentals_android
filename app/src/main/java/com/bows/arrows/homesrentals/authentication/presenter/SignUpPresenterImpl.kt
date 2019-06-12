@@ -31,8 +31,8 @@ class SignUpPresenterImpl(private val signUpView: ISignUpView) : ISignUpPresente
         user.pushUserDataToBackend(user)
     }
 
-    override fun onPushError() {
-        signUpView.onSubmitError()
+    override fun onPushError(message:String) {
+        signUpView.onSubmitError(message)
     }
 
     override fun onPushSuccess() {
