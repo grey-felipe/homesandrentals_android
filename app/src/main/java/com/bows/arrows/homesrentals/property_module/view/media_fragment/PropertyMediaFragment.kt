@@ -1,4 +1,4 @@
-package com.bows.arrows.homesrentals.property_module.view
+package com.bows.arrows.homesrentals.property_module.view.media_fragment
 
 import android.app.Activity.RESULT_OK
 import android.content.Intent
@@ -14,7 +14,9 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bows.arrows.homesrentals.R
 import com.bows.arrows.homesrentals.property_module.adapters.PropertyMediaRecyclerAdapter
-import com.bows.arrows.homesrentals.property_module.presenter.AddPropertyPresenterImpl
+import com.bows.arrows.homesrentals.property_module.presenter.media_presenter.PropertyMediaPresenterImpl
+import com.bows.arrows.homesrentals.property_module.view.AddPropertyViewModel
+import com.bows.arrows.homesrentals.property_module.view.review_fragment.PropertyReviewFragment
 import com.sangcomz.fishbun.FishBun
 import com.sangcomz.fishbun.adapter.image.impl.GlideAdapter
 import com.sangcomz.fishbun.define.Define
@@ -32,7 +34,7 @@ class PropertyMediaFragment : Fragment(), IPropertyMediaView {
     private lateinit var addImagesLayout: LinearLayout
 
     private lateinit var viewModel: AddPropertyViewModel
-    private lateinit var presenter: AddPropertyPresenterImpl
+    private lateinit var presenter: PropertyMediaPresenterImpl
     private lateinit var images: List<Uri>
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -40,7 +42,7 @@ class PropertyMediaFragment : Fragment(), IPropertyMediaView {
         (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         fragView = inflater.inflate(R.layout.fragment_property_media, container, false)
-        presenter = AddPropertyPresenterImpl(this)
+        presenter = PropertyMediaPresenterImpl(this)
         images = emptyList()
         initializeViews(fragView)
         return fragView
@@ -107,6 +109,17 @@ class PropertyMediaFragment : Fragment(), IPropertyMediaView {
 
     override fun onValidationError(message: String) {
         Toast.makeText(context, "$message were not provided", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun startReviewFragment() {
+        fragmentManager!!.beginTransaction()
+            .replace(
+                R.id.add_property_activity_fragment_container,
+                PropertyReviewFragment.newInstance(),
+                "PROPERTY_REVIEW_FRAGMENT"
+            )
+            .addToBackStack("PROPERTY_MEDIA_FRAGMENT")
+            .commit()
     }
 
 

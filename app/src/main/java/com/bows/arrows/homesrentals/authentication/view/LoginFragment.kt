@@ -15,7 +15,6 @@ import androidx.fragment.app.Fragment
 import com.bows.arrows.homesrentals.MainActivity
 import com.bows.arrows.homesrentals.R
 import com.bows.arrows.homesrentals.authentication.presenter.LoginPresenterImpl
-import com.bows.arrows.homesrentals.utilities.Constants
 
 
 /**
@@ -30,13 +29,13 @@ class LoginFragment : Fragment(), View.OnClickListener, ILoginView {
     private lateinit var signUpBtn: Button
     private lateinit var loginBtn: Button
 
-    private lateinit var loginPresenterImpl: LoginPresenterImpl
+    private lateinit var presenter: LoginPresenterImpl
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(false)
 
         fragView = inflater.inflate(R.layout.fragment_login, container, false)
-        loginPresenterImpl = LoginPresenterImpl(this)
+        presenter = LoginPresenterImpl(this)
         initializeViews(fragView)
         return fragView
     }
@@ -56,46 +55,44 @@ class LoginFragment : Fragment(), View.OnClickListener, ILoginView {
     override fun onClick(v: View?) {
         when (v!!.id) {
             signUpBtn.id -> {
-                loadSignUpFragment()
+                signUp()
             }
             loginBtn.id -> {
-                submitUserData()
+                login()
             }
         }
     }
 
-    override fun loadSignUpFragment() {
+    override fun signUp() {
         fragmentManager!!.beginTransaction()
             .replace(R.id.authFragmentsContainer, SignUpFragment.newInstance(), "SIGN_UP_FRAGMENT")
             .addToBackStack("LOGIN_FRAGMENT")
             .commit()
     }
 
-    override fun submitUserData() {
-        loginPresenterImpl.validateData(emailEdt.text.toString(), passwordEdt.text.toString())
+    override fun login() {
+        presenter.validateData(emailEdt.text.toString(), passwordEdt.text.toString())
     }
 
-    override fun onValidationError(value: String) {
-        Toast.makeText(context, "$value was not provided.", Toast.LENGTH_SHORT).show()
+    override fun getFragContext(): Context {
+        return context!!
     }
 
-    override fun onSubmitError() {
-        Toast.makeText(context, "Login failed, please check your network or credentials.", Toast.LENGTH_SHORT)
-            .show()
+    override fun onValidationError(error: String) {
+        when (error) {
+            "Email" -> presenter.validationError(emailEdt, error)
+            "Password" -> presenter.validationError(passwordEdt, error)
+        }
     }
 
-    override fun onSubmitSuccess(token: String) {
-        saveTokenToSharedPreferences(token)
+    override fun onError(error: String) {
+        Toast.makeText(context, error, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onSuccess(message: String) {
         val intent = Intent(context, MainActivity::class.java)
         startActivity(intent)
         activity!!.finish()
-    }
-
-    private fun saveTokenToSharedPreferences(token: String) {
-        val sharedPreferences = context!!.getSharedPreferences(Constants.SHARED_PREFERENCES_FILE, Context.MODE_PRIVATE)
-        val editor = sharedPreferences.edit()
-        editor.putString(Constants.SHARED_PREFERENCES_TOKEN_KEY, token)
-        editor.apply()
     }
 
     companion object {

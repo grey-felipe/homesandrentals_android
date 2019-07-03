@@ -1,6 +1,7 @@
 package com.bows.arrows.homesrentals.authentication.view
 
 
+import android.content.Context
 import android.os.Bundle
 import android.view.*
 import android.widget.EditText
@@ -69,11 +70,15 @@ class SignUpFragment : Fragment(), ISignUpView {
         Toast.makeText(context, "$value was not provided.", Toast.LENGTH_SHORT).show()
     }
 
-    override fun onSubmitError(message: String) {
-        Toast.makeText(context, "Registration failed, $message", Toast.LENGTH_SHORT).show()
+    override fun getFragContext(): Context {
+        return context!!
     }
 
-    override fun onSubmitSuccess() {
+    override fun onError(error: String) {
+        Toast.makeText(context, "Registration failed, $error", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onSuccess(message: String) {
         fragmentManager!!.popBackStackImmediate()
     }
 

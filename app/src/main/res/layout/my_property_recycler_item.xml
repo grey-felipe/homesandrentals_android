@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+
+    <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/my_property_imageview"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@android:color/black"/>
+
+    <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="16dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+        <TextView
+                android:id="@+id/my_property_title_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/title"
+                android:textSize="18sp"/>
+
+        <TextView
+                android:id="@+id/my_property_location_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/add_property_location"
+                android:textSize="14sp"
+                android:layout_marginTop="4dp"/>
+
+        <TextView
+                android:id="@+id/my_property_price_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/price"
+                android:textSize="14sp"
+                android:layout_marginTop="4dp"/>
+    </LinearLayout>
+
+    <!--<androidx.appcompat.widget.AppCompatToggleButton-->
+    <!--android:id="@+id/property_favorite_textview"-->
+    <!--android:layout_width="20dp"-->
+    <!--android:layout_height="20dp"-->
+    <!--android:background="@drawable/button_favorite"-->
+    <!--android:layout_gravity="bottom"-->
+    <!--android:checked="false"-->
+    <!--android:text=""-->
+    <!--android:textOff=""-->
+    <!--android:textOn=""/>-->
+</LinearLayout>

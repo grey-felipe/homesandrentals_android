@@ -1,20 +1,21 @@
 package com.bows.arrows.homesrentals.database
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
+import androidx.room.Insert
 import androidx.room.Query
-import com.bows.arrows.homesrentals.property_module.model.Property
 
 @Dao
 interface PropertyDao {
-    @Query("")
-    fun addProperty(property: Property)
+    @Insert
+    suspend fun addProperty(property: PropertyEntity): Long
 
-    @Query("")
-    fun findPropertyByTitle(title: Property)
+    @Query("SELECT * FROM property_table WHERE title = :title")
+    fun findPropertyByTitle(title: String): LiveData<PropertyEntity>
 
-    @Query("")
-    fun getAllProperty()
+    @Query("SELECT * FROM property_table")
+    fun getAllProperty(): LiveData<List<PropertyEntity>>
 
-    @Query("")
-    fun deleteProperty()
+    @Query("DELETE FROM property_table WHERE id = :id")
+    fun deleteProperty(id: Int)
 }

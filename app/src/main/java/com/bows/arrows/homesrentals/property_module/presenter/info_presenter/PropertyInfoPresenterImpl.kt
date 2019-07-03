@@ -1,10 +1,10 @@
-package com.bows.arrows.homesrentals.property_module.presenter
+package com.bows.arrows.homesrentals.property_module.presenter.info_presenter
 
 import com.bows.arrows.homesrentals.property_module.model.Property
-import com.bows.arrows.homesrentals.property_module.view.IPropertyInfoView
+import com.bows.arrows.homesrentals.property_module.view.info_fragment.IPropertyInfoView
 
 class PropertyInfoPresenterImpl(private val view: IPropertyInfoView) : IPropertyInfoPresenter {
-    override fun validatePropertyData(
+    override fun validatePropertyInfo(
         title: String,
         price: Int,
         currency: String,
@@ -12,7 +12,6 @@ class PropertyInfoPresenterImpl(private val view: IPropertyInfoView) : IProperty
         available: Boolean,
         description: String
     ) {
-
         when {
             title.isEmpty() || title.isBlank() -> {
                 view.onValidationError("Title")
@@ -30,13 +29,14 @@ class PropertyInfoPresenterImpl(private val view: IPropertyInfoView) : IProperty
                 view.onValidationError("Description")
             }
             else -> {
-                val list = mutableListOf("")
+                val list = emptyList<Any>()
                 val property = Property(
                     title, price, currency, type,
                     available, description, media = list
                 )
-                view.startLocationFragment(property)
+                view.passPropertyToViewModel(property)
             }
         }
     }
+
 }

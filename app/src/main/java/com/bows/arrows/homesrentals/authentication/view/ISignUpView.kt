@@ -1,8 +1,7 @@
 package com.bows.arrows.homesrentals.authentication.view
 
-interface ISignUpView {
+import com.bows.arrows.homesrentals.authentication.base_contracts.IBaseAuthView
+
+interface ISignUpView : IBaseAuthView{
     fun submitUserData()
-    fun onValidationError(value: String)
-    fun onSubmitError(message:String)
-    fun onSubmitSuccess()
 }
