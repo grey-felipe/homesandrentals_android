@@ -1,4 +1,4 @@
-package com.bows.arrows.homesrentals.property_module.view
+package com.bows.arrows.homesrentals.property_module.view.info_fragment
 
 
 import android.os.Bundle
@@ -10,7 +10,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.bows.arrows.homesrentals.R
 import com.bows.arrows.homesrentals.property_module.model.Property
-import com.bows.arrows.homesrentals.property_module.presenter.PropertyInfoPresenterImpl
+import com.bows.arrows.homesrentals.property_module.presenter.info_presenter.PropertyInfoPresenterImpl
+import com.bows.arrows.homesrentals.property_module.view.AddPropertyViewModel
+import com.bows.arrows.homesrentals.property_module.view.location_fragment.PropertyLocationFragment
 import com.google.android.material.chip.ChipGroup
 import com.jaredrummler.materialspinner.MaterialSpinner
 
@@ -57,7 +59,7 @@ class PropertyInfoFragment : Fragment(), IPropertyInfoView {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.property_info_next -> {
-                presenter.validatePropertyData(
+                presenter.validatePropertyInfo(
                     titleEdt.text.toString(),
                     parsePrice(priceEdt.text.toString()),
                     currency,
@@ -101,7 +103,6 @@ class PropertyInfoFragment : Fragment(), IPropertyInfoView {
         spinner.setOnItemSelectedListener { view, position, id, item ->
             currency = item.toString()
         }
-
     }
 
     private fun parsePrice(value: String): Int {
@@ -118,8 +119,12 @@ class PropertyInfoFragment : Fragment(), IPropertyInfoView {
         Toast.makeText(context, "$message was not provided", Toast.LENGTH_SHORT).show()
     }
 
-    override fun startLocationFragment(property: Property) {
+    override fun passPropertyToViewModel(property: Property) {
         viewModel.setPropertyObject(property)
+        startLocationFragment()
+    }
+
+    override fun startLocationFragment() {
         fragmentManager!!.beginTransaction()
             .replace(
                 R.id.add_property_activity_fragment_container,

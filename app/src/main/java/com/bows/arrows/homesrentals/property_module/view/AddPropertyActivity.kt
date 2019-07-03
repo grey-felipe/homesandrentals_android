@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.bows.arrows.homesrentals.R
+import com.bows.arrows.homesrentals.property_module.view.info_fragment.PropertyInfoFragment
 
 class AddPropertyActivity : AppCompatActivity() {
     private lateinit var toolbar: Toolbar

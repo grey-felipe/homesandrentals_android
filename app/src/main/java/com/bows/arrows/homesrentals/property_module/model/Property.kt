@@ -27,12 +27,12 @@ data class Property(
     var media: List<Any>
 ) : IProperty {
 
-    private lateinit var presenterImpl: AddPropertyPresenterImpl
+//    private lateinit var presenterImpl: AddPropertyPresenterImpl
     private lateinit var storageReference: StorageReference
 
-    fun getPresenterImpl(obj: AddPropertyPresenterImpl) {
-        presenterImpl = obj
-    }
+//    fun getPresenterImpl(obj: AddPropertyPresenterImpl) {
+//        presenterImpl = obj
+//    }
 
     private fun createImageName(media: Uri): String {
         val uuid = UUID.randomUUID()
@@ -95,10 +95,10 @@ data class Property(
     }
 
     override fun onPushError(message: String) {
-        presenterImpl.onPushError(message)
+//        presenterImpl.onPushError(message)
     }
 
     override fun onPushSuccess(message: String) {
-        presenterImpl.onPushSuccess(message)
+//        presenterImpl.onPushSuccess(message)
     }
 }

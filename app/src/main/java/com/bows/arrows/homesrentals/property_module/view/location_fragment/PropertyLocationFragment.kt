@@ -1,4 +1,4 @@
-package com.bows.arrows.homesrentals.property_module.view
+package com.bows.arrows.homesrentals.property_module.view.location_fragment
 
 
 import android.Manifest
@@ -15,6 +15,8 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.bows.arrows.homesrentals.R
+import com.bows.arrows.homesrentals.property_module.view.AddPropertyViewModel
+import com.bows.arrows.homesrentals.property_module.view.media_fragment.PropertyMediaFragment
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -131,9 +133,9 @@ class PropertyLocationFragment : Fragment(), OnMapReadyCallback, View.OnClickLis
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.property_location_next -> {
-//                if (locationName.isBlank() || locationName.isEmpty()) {
-//                    Toast.makeText(context, "Please provide a location", Toast.LENGTH_SHORT).show()
-//                } else {
+                if (locationName.isBlank() || locationName.isEmpty()) {
+                    Toast.makeText(context, "Please provide a location", Toast.LENGTH_SHORT).show()
+                } else {
                     viewModel.addLocation(locationName, LatLng(propLatitude, propLongitude))
                     fragmentManager!!.beginTransaction()
                         .replace(
@@ -143,7 +145,7 @@ class PropertyLocationFragment : Fragment(), OnMapReadyCallback, View.OnClickLis
                         )
                         .addToBackStack("PROPERTY_LOCATION_FRAGMENT")
                         .commit()
-//                }
+                }
             }
             android.R.id.home -> {
                 activity!!.onBackPressed()
@@ -187,12 +189,12 @@ class PropertyLocationFragment : Fragment(), OnMapReadyCallback, View.OnClickLis
     }
 
     private fun geoCoder(latitude: Double, longitude: Double) {
-//        val geoCoder = Geocoder(context)
-//        val list = geoCoder.getFromLocation(latitude, longitude, 1)
-//        if (list.isNotEmpty()) {
-//            val address: Address = list[0]
-//            locationName = address.getAddressLine(0)
-//        }
+        val geoCoder = Geocoder(context)
+        val list = geoCoder.getFromLocation(latitude, longitude, 1)
+        if (list.isNotEmpty()) {
+            val address: Address = list[0]
+            locationName = address.getAddressLine(0)
+        }
     }
 
     override fun onClick(v: View?) {
